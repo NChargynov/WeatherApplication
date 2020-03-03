@@ -28,7 +28,7 @@ public class OnBoardActivity extends BaseActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private Button buttonNext;
-    private MenuItem menuSkip;
+    private MenuItem menuItem;
     private int currentPage;
 
     @Override
@@ -47,7 +47,6 @@ public class OnBoardActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
         tabLayout = findViewById(R.id.tab_layout);
         buttonNext = findViewById(R.id.btn_next);
-        menuSkip = findViewById(R.id.menu_skip);
     }
 
     private void listeners() {
@@ -66,6 +65,7 @@ public class OnBoardActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_skip, menu);
+        menuItem = menu.findItem(R.id.menu_skip);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -86,7 +86,7 @@ public class OnBoardActivity extends BaseActivity {
         onBoardItems.add(new OnBoardItem("В данном приложении вы можете учиться))", R.drawable.girl));
         onBoardItems.add(new OnBoardItem("В данном приложении вы можете обновлять))", R.drawable.update));
         onBoardItems.add(new OnBoardItem("В данном приложении вы можете удалять))", R.drawable.delete));
-        onBoardItems.add(new OnBoardItem("Спсибо что вы с нами", R.drawable.thankyou));
+        onBoardItems.add(new OnBoardItem("Спасибо что вы с нами))", R.drawable.thankyou));
         return onBoardItems;
     }
 
@@ -110,8 +110,10 @@ public class OnBoardActivity extends BaseActivity {
                 currentPage = position;
                 if (position == 3) {
                     buttonNext.setText("Начать");
+                    menuItem.setTitle("Готово");
                 } else {
                     buttonNext.setText("Далее");
+                    menuItem.setTitle("Пропустить");
                 }
             }
 
