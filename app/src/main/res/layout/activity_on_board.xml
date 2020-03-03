@@ -14,6 +14,7 @@
         android:layout_height="match_parent"/>
 
     <androidx.appcompat.widget.Toolbar
+        android:theme="@style/ThemeForMenuItem"
         android:padding="4dp"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

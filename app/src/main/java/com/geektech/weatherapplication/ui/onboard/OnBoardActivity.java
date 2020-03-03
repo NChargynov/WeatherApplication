@@ -83,10 +83,10 @@ public class OnBoardActivity extends BaseActivity {
 
     private ArrayList<OnBoardItem> getItems() {
         ArrayList<OnBoardItem> onBoardItems = new ArrayList<>();
-        onBoardItems.add(new OnBoardItem("В данном приложении вы можете учиться))", R.drawable.girl));
-        onBoardItems.add(new OnBoardItem("В данном приложении вы можете обновлять))", R.drawable.update));
-        onBoardItems.add(new OnBoardItem("В данном приложении вы можете удалять))", R.drawable.delete));
-        onBoardItems.add(new OnBoardItem("Спасибо что вы с нами))", R.drawable.thankyou));
+        onBoardItems.add(new OnBoardItem(getString(R.string.titleOne), R.drawable.girl));
+        onBoardItems.add(new OnBoardItem(getString(R.string.tilteTwo), R.drawable.update));
+        onBoardItems.add(new OnBoardItem(getString(R.string.titleThree), R.drawable.delete));
+        onBoardItems.add(new OnBoardItem(getString(R.string.titleFour), R.drawable.thankyou));
         return onBoardItems;
     }
 

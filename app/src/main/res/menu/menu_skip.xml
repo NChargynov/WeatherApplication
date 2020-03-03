@@ -5,7 +5,7 @@
         android:id="@+id/menu_skip"
         android:title="@string/skip"
         app:showAsAction="always"
-        android:tooltipText="@string/skip"
         android:visible="true"
-        />
+    />
+
 </menu>
