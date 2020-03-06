@@ -9,4 +9,13 @@
     <string name="tilteTwo">В данном приложении вы можете обновлять))</string>
     <string name="titleThree">В данном приложении вы можете удалять))</string>
     <string name="titleFour">Спасибо что вы с нами))</string>
+    <string name="nowWeather">Now</string>
+    <string name="todayWeather">Today</string>
+    <string name="little_cloud">Little Cloud</string>
+    <string name="comma">%1$s, %2$s</string>
+    <string name="celsius">%1$s C</string>
+    <string name="speedForWind">SW %1$sm/s</string>
+    <string name="mbForPressure">%1$smb</string>
+    <string name="amSunRise">%1$s am</string>
+    <string name="pmSunSet">%1$s pm</string>
 </resources>
