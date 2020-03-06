@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateUtils {
-    public static final String SUNSET_FORMAT ="hh:mm";
+    public static final String SUNSET_FORMAT ="HH:mm";
 
 
     public static String parseSunset(Integer time){

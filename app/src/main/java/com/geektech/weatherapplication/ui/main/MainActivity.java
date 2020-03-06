@@ -61,8 +61,8 @@ public class MainActivity extends BaseActivity {
         tvValueForPressure.setText(getString(R.string.mbForPressure, currentWeather.getMain().getPressure().toString()));
         tvValueForHumidity.setText(currentWeather.getMain().getHumidity().toString() + "%");
         tvValueForCloudiness.setText(currentWeather.getClouds().getAll().toString() + "%");
-        tvValueForSunrise.setText(getString(R.string.amSunRise, DateUtils.parseSunset(currentWeather.getSys().getSunrise())));
-        tvValueForSunset.setText(getString(R.string.pmSunSet , DateUtils.parseSunset(currentWeather.getSys().getSunset())));
+        tvValueForSunrise.setText(DateUtils.parseSunset(currentWeather.getSys().getSunrise()));
+        tvValueForSunset.setText(DateUtils.parseSunset(currentWeather.getSys().getSunset()));
     }
 
     private void glide(Response<CurrentWeather> response) {

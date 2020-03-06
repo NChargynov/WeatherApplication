@@ -16,6 +16,4 @@
     <string name="celsius">%1$s C</string>
     <string name="speedForWind">SW %1$sm/s</string>
     <string name="mbForPressure">%1$smb</string>
-    <string name="amSunRise">%1$s am</string>
-    <string name="pmSunSet">%1$s pm</string>
 </resources>
