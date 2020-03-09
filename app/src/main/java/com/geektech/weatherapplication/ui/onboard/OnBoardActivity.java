@@ -109,11 +109,11 @@ public class OnBoardActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 currentPage = position;
                 if (position == 3) {
-                    buttonNext.setText("Начать");
-                    menuItem.setTitle("Готово");
+                    buttonNext.setText(getString(R.string.start));
+                    menuItem.setTitle(getString(R.string.readt));
                 } else {
-                    buttonNext.setText("Далее");
-                    menuItem.setTitle("Пропустить");
+                    buttonNext.setText(getString(R.string.next));
+                    menuItem.setTitle(getString(R.string.skip));
                 }
             }
 

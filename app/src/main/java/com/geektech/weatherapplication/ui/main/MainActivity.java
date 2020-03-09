@@ -6,10 +6,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.geektech.weatherapplication.R;
 import com.geektech.weatherapplication.data.internet.RetrofitBuilder;
 import com.geektech.weatherapplication.data.pojo.CurrentWeather;
+import com.geektech.weatherapplication.data.pojo.ForecastWeather;
 import com.geektech.weatherapplication.ui.base.BaseActivity;
 import com.geektech.weatherapplication.utils.DateUtils;
 
@@ -17,11 +20,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.geektech.weatherapplication.BuildConfig.APP_ID;
+
 public class MainActivity extends BaseActivity {
-    TextView tvCityName, tvTempNow, tvTempMaxToday, tvTempMinToday, tvValurForWind,
+    private TextView tvCityName, tvTempNow, tvTempMaxToday, tvTempMinToday, tvValurForWind,
             tvValueForPressure, tvValueForHumidity, tvValueForCloudiness, tvValueForSunrise,
-            tvValueForSunset;
-    ImageView imageForIcon;
+            tvValueForSunset, tvDateDay, tvDateMonth, tvDateYear;
+    private ImageView imageForIcon;
+    private RecyclerView recyclerView;
+    private ForecastAdapter adapter;
+
 
 
     @Override
@@ -29,11 +37,37 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpViews();
-        loadData();
+        setUpRecyclerView();
+        loadCurrentWeathers();
+        loadForecastWeathers();
     }
 
-    private void loadData() {
-        RetrofitBuilder.getService().getCurrentWeather("Bishkek", "4bbf5a1ed98cd9f688ebb3651474cdd2", "metric")
+    private void setUpRecyclerView() {
+        adapter = new ForecastAdapter();
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void loadForecastWeathers() {
+        RetrofitBuilder.getService().getForecastWeather("Bishkek", APP_ID, "metric")
+                .enqueue(new Callback<ForecastWeather>() {
+                    @Override
+                    public void onResponse(Call<ForecastWeather> call, Response<ForecastWeather> response) {
+                        if (response.isSuccessful() && response.body() != null){
+                            adapter.update(response.body().getList());
+                        } else {
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ForecastWeather> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void loadCurrentWeathers() {
+        RetrofitBuilder.getService().getCurrentWeather("Bishkek", APP_ID, "metric")
                 .enqueue(new Callback<CurrentWeather>() {
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
@@ -41,6 +75,8 @@ public class MainActivity extends BaseActivity {
                             CurrentWeather currentWeather = response.body();
                             addValues(currentWeather);
                             glide(response);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -63,11 +99,17 @@ public class MainActivity extends BaseActivity {
         tvValueForCloudiness.setText(currentWeather.getClouds().getAll().toString() + "%");
         tvValueForSunrise.setText(DateUtils.parseSunset(currentWeather.getSys().getSunrise()));
         tvValueForSunset.setText(DateUtils.parseSunset(currentWeather.getSys().getSunset()));
+        tvDateDay.setText(DateUtils.parseDateDay(currentWeather));
+        tvDateMonth.setText(DateUtils.parseDateMonth(currentWeather));
+        tvDateYear.setText(DateUtils.parseDateYear(currentWeather));
     }
 
     private void glide(Response<CurrentWeather> response) {
         Glide.with(MainActivity.this).load("http://openweathermap.org/img/wn/" + response.body().
                 getWeather().get(0).getIcon() + "@2x.png").centerCrop().into(imageForIcon);
+
+//        Glide.with(itemView).load("http://openweathermap.org/img/wn/" +
+//                currentWeather.getWeather().get(0).getIcon() + "@2x.png").into(imageView);
     }
 
     private void setUpViews() {
@@ -82,5 +124,9 @@ public class MainActivity extends BaseActivity {
         tvValueForSunrise = findViewById(R.id.valueForSunrise);
         tvValueForSunset = findViewById(R.id.valueForSunset);
         imageForIcon = findViewById(R.id.imageIcon);
+        recyclerView = findViewById(R.id.recyclerView);
+        tvDateDay = findViewById(R.id.tvDate);
+        tvDateMonth = findViewById(R.id.tvMonth);
+        tvDateYear = findViewById(R.id.tvYear);
     }
 }

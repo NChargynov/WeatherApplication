@@ -16,4 +16,15 @@
     <string name="celsius">%1$s C</string>
     <string name="speedForWind">SW %1$sm/s</string>
     <string name="mbForPressure">%1$smb</string>
+    <string name="readt">Готово</string>
+    <string name="start">Начать</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="cloudiness">Cloudiness</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="this_week">This Week</string>
 </resources>

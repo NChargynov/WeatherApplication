@@ -16,7 +16,6 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         chooseScreen();
-        finish();
     }
 
     private void chooseScreen() {
@@ -25,5 +24,6 @@ public class SplashActivity extends BaseActivity {
         } else {
             startActivity(new Intent(this, OnBoardActivity.class));
         }
+        finish();
     }
 }
