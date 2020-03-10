@@ -20,7 +20,6 @@ public class ForecastViewHolder extends RecyclerView.ViewHolder {
 
     public ForecastViewHolder(@NonNull View itemView) {
         super(itemView);
-
         tvNowTemp = itemView.findViewById(R.id.tvTempNowItem);
         tvMaxTemp = itemView.findViewById(R.id.tvTempMaxItem);
         tvMinTemp = itemView.findViewById(R.id.tvTempMinItem);
