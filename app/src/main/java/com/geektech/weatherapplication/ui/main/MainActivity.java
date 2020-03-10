@@ -53,7 +53,11 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onResponse(Call<ForecastWeather> call, Response<ForecastWeather> response) {
                         if (response.isSuccessful() && response.body() != null){
+                            ForecastWeather forecastWeather = response.body();
                             adapter.update(response.body().getList());
+                            tvTempNow.setText(getString(R.string.celsius, forecastWeather.getList().get(0).getMain().getTemp().toString()));
+                            tvTempMaxToday.setText(getString(R.string.celsius, forecastWeather.getList().get(0).getMain().getTempMax().toString()));
+                            tvTempMinToday.setText(getString(R.string.celsius, forecastWeather.getList().get(0).getMain().getTempMin().toString()));
                         } else {
                             Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
@@ -90,9 +94,6 @@ public class MainActivity extends BaseActivity {
     private void addValues(CurrentWeather currentWeather) {
         tvCityName.setText(getString(R.string.comma,currentWeather.getName()
                 ,currentWeather.getSys().getCountry()));
-        tvTempNow.setText(getString(R.string.celsius, currentWeather.getMain().getTemp().toString()));
-        tvTempMaxToday.setText(getString(R.string.celsius, currentWeather.getMain().getTempMax().toString()));
-        tvTempMinToday.setText(getString(R.string.celsius, currentWeather.getMain().getTempMin().toString()));
         tvValurForWind.setText(getString(R.string.speedForWind, currentWeather.getWind().getSpeed().toString()));
         tvValueForPressure.setText(getString(R.string.mbForPressure, currentWeather.getMain().getPressure().toString()));
         tvValueForHumidity.setText(currentWeather.getMain().getHumidity().toString() + "%");
