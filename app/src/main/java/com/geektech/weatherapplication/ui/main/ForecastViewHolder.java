@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide;
 import com.geektech.weatherapplication.R;
 import com.geektech.weatherapplication.data.pojo.CurrentWeather;
 
-import retrofit2.Response;
 
 public class ForecastViewHolder extends RecyclerView.ViewHolder {
 

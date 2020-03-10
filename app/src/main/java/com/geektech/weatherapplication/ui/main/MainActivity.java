@@ -25,7 +25,7 @@ import static com.geektech.weatherapplication.BuildConfig.APP_ID;
 public class MainActivity extends BaseActivity {
     private TextView tvCityName, tvTempNow, tvTempMaxToday, tvTempMinToday, tvValurForWind,
             tvValueForPressure, tvValueForHumidity, tvValueForCloudiness, tvValueForSunrise,
-            tvValueForSunset, tvDateDay, tvDateMonth, tvDateYear;
+            tvValueForSunset, tvDateDay, tvDateMonth, tvDateYear, tvDescCloud;
     private ImageView imageForIcon;
     private RecyclerView recyclerView;
     private ForecastAdapter adapter;
@@ -103,6 +103,7 @@ public class MainActivity extends BaseActivity {
         tvDateDay.setText(DateUtils.parseDateDay(currentWeather));
         tvDateMonth.setText(DateUtils.parseDateMonth(currentWeather));
         tvDateYear.setText(DateUtils.parseDateYear(currentWeather));
+        tvDescCloud.setText(currentWeather.getWeather().get(0).getDescription());
     }
 
     private void glide(Response<CurrentWeather> response) {
@@ -129,5 +130,6 @@ public class MainActivity extends BaseActivity {
         tvDateDay = findViewById(R.id.tvDate);
         tvDateMonth = findViewById(R.id.tvMonth);
         tvDateYear = findViewById(R.id.tvYear);
+        tvDescCloud = findViewById(R.id.descCloud);
     }
 }
