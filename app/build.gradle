@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -13,8 +14,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         //forHideBaseURL
-        buildConfigField "String","BASE_URL", "\"${baseUrl}\""
-        buildConfigField "String","APP_ID", "\"${appId}\""
+        buildConfigField "String", "BASE_URL", "\"${baseUrl}\""
+        buildConfigField "String", "APP_ID", "\"${appId}\""
     }
     buildTypes {
         release {
@@ -37,6 +38,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -51,7 +53,6 @@ dependencies {
     //Json
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-
 
 
 }

@@ -81,6 +81,17 @@
         app:layout_constraintTop_toBottomOf="@+id/imageLocation"
         tools:src="@mipmap/ic_launcher" />
 
+    <ImageView
+        android:id="@+id/imageMap"
+        android:padding="8dp"
+        app:srcCompat="@drawable/ic_near_me_black"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBarMainActivity"
+        android:layout_width="45dp"
+        android:layout_height="45dp"/>
+
     <TextView
         android:id="@+id/textNowWeather"
         android:layout_width="wrap_content"
@@ -100,6 +111,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/todayWeather"
         android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/tempTodayMax"
         app:layout_constraintLeft_toRightOf="@+id/textNowWeather"
         app:layout_constraintTop_toBottomOf="@+id/imageIcon" />
 
@@ -119,11 +131,12 @@
         android:id="@+id/tempTodayMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@+id/tempNow"
+        app:layout_constraintBottom_toTopOf="@+id/textMax"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/todayText"
         tools:text="28 C" />
 
@@ -131,7 +144,7 @@
         android:id="@+id/tempTodayMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -152,9 +165,9 @@
         android:id="@+id/textMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="20dp"
         android:text="@string/max"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/descCloud"
         app:layout_constraintTop_toBottomOf="@+id/tempTodayMax" />
 
     <TextView

@@ -1,6 +1,7 @@
 package com.geektech.weatherapplication.ui.main;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +14,9 @@ import com.geektech.weatherapplication.R;
 import com.geektech.weatherapplication.data.internet.RetrofitBuilder;
 import com.geektech.weatherapplication.data.pojo.CurrentWeather;
 import com.geektech.weatherapplication.data.pojo.ForecastWeather;
+import com.geektech.weatherapplication.data.service.ServiceBuilder;
 import com.geektech.weatherapplication.ui.base.BaseActivity;
+import com.geektech.weatherapplication.ui.service.ServiceUIActivity;
 import com.geektech.weatherapplication.utils.DateUtils;
 
 import retrofit2.Call;
@@ -26,7 +29,7 @@ public class MainActivity extends BaseActivity {
     private TextView tvCityName, tvTempNow, tvTempMaxToday, tvTempMinToday, tvValurForWind,
             tvValueForPressure, tvValueForHumidity, tvValueForCloudiness, tvValueForSunrise,
             tvValueForSunset, tvDateDay, tvDateMonth, tvDateYear, tvDescCloud;
-    private ImageView imageForIcon;
+    private ImageView imageForIcon, imageMap;
     private RecyclerView recyclerView;
     private ForecastAdapter adapter;
 
@@ -40,6 +43,12 @@ public class MainActivity extends BaseActivity {
         setUpRecyclerView();
         loadCurrentWeathers();
         loadForecastWeathers();
+        listeners();
+    }
+
+    private void listeners() {
+        imageMap.setOnClickListener(v ->
+                startActivity(new Intent(this, ServiceUIActivity.class)));
     }
 
     private void setUpRecyclerView() {
@@ -53,11 +62,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onResponse(Call<ForecastWeather> call, Response<ForecastWeather> response) {
                         if (response.isSuccessful() && response.body() != null){
-                            ForecastWeather forecastWeather = response.body();
                             adapter.update(response.body().getList());
-                            tvTempNow.setText(getString(R.string.celsius, forecastWeather.getList().get(0).getMain().getTemp().toString()));
-                            tvTempMaxToday.setText(getString(R.string.celsius, forecastWeather.getList().get(0).getMain().getTempMax().toString()));
-                            tvTempMinToday.setText(getString(R.string.celsius, forecastWeather.getList().get(0).getMain().getTempMin().toString()));
                         } else {
                             Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
@@ -103,15 +108,15 @@ public class MainActivity extends BaseActivity {
         tvDateDay.setText(DateUtils.parseDateDay(currentWeather));
         tvDateMonth.setText(DateUtils.parseDateMonth(currentWeather));
         tvDateYear.setText(DateUtils.parseDateYear(currentWeather));
+        tvTempNow.setText(getString(R.string.celsius, currentWeather.getMain().getTemp().toString()));
+        tvTempMaxToday.setText(getString(R.string.celsius, currentWeather.getMain().getTempMax().toString()));
+        tvTempMinToday.setText(getString(R.string.celsius, currentWeather.getMain().getTempMin().toString()));
         tvDescCloud.setText(currentWeather.getWeather().get(0).getDescription());
     }
 
     private void glide(Response<CurrentWeather> response) {
         Glide.with(MainActivity.this).load("http://openweathermap.org/img/wn/" + response.body().
                 getWeather().get(0).getIcon() + "@2x.png").centerCrop().into(imageForIcon);
-
-//        Glide.with(itemView).load("http://openweathermap.org/img/wn/" +
-//                currentWeather.getWeather().get(0).getIcon() + "@2x.png").into(imageView);
     }
 
     private void setUpViews() {
@@ -131,5 +136,6 @@ public class MainActivity extends BaseActivity {
         tvDateMonth = findViewById(R.id.tvMonth);
         tvDateYear = findViewById(R.id.tvYear);
         tvDescCloud = findViewById(R.id.descCloud);
+        imageMap = findViewById(R.id.imageMap);
     }
 }

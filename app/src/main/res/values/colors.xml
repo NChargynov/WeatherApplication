@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorText">#3F51B5</color>
     <color name="colorForToolbar">#7A7776</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
