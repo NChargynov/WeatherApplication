@@ -20,33 +20,38 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import butterknife.BindView;
+
+import static com.geektech.weatherapplication.R.id.btn_next;
+import static com.geektech.weatherapplication.R.id.tab_layout;
 import static com.geektech.weatherapplication.R.id.viewPager;
 
 public class OnBoardActivity extends BaseActivity {
 
-    private ViewPager pager;
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private Button buttonNext;
+    @BindView(viewPager)
+    ViewPager pager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(tab_layout)
+    TabLayout tabLayout;
+    @BindView(btn_next)
+    Button buttonNext;
+
     private MenuItem menuItem;
     private int currentPage;
 
     @Override
+    public int getViewId() {
+        return R.layout.activity_on_board;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_board);
-        setUpId();
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         initViewPagerAdapter();
         listeners();
-    }
-
-    private void setUpId() {
-        pager = findViewById(viewPager);
-        toolbar = findViewById(R.id.toolbar);
-        tabLayout = findViewById(R.id.tab_layout);
-        buttonNext = findViewById(R.id.btn_next);
     }
 
     private void listeners() {

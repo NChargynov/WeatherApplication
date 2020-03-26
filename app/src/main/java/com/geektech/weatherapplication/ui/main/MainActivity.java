@@ -14,11 +14,11 @@ import com.geektech.weatherapplication.R;
 import com.geektech.weatherapplication.data.internet.RetrofitBuilder;
 import com.geektech.weatherapplication.data.pojo.CurrentWeather;
 import com.geektech.weatherapplication.data.pojo.ForecastWeather;
-import com.geektech.weatherapplication.data.service.ServiceBuilder;
 import com.geektech.weatherapplication.ui.base.BaseActivity;
 import com.geektech.weatherapplication.ui.service.ServiceUIActivity;
 import com.geektech.weatherapplication.utils.DateUtils;
 
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,20 +26,52 @@ import retrofit2.Response;
 import static com.geektech.weatherapplication.BuildConfig.APP_ID;
 
 public class MainActivity extends BaseActivity {
-    private TextView tvCityName, tvTempNow, tvTempMaxToday, tvTempMinToday, tvValurForWind,
-            tvValueForPressure, tvValueForHumidity, tvValueForCloudiness, tvValueForSunrise,
-            tvValueForSunset, tvDateDay, tvDateMonth, tvDateYear, tvDescCloud;
-    private ImageView imageForIcon, imageMap;
-    private RecyclerView recyclerView;
+
+    @BindView(R.id.cityName)
+    TextView tvCityName;
+    @BindView(R.id.tempNow)
+    TextView tvTempNow;
+    @BindView(R.id.tempTodayMax)
+    TextView tvTempMaxToday;
+    @BindView(R.id.tempTodayMin)
+    TextView tvTempMinToday;
+    @BindView(R.id.valueForWind)
+    TextView tvValueForWind;
+    @BindView(R.id.valueForPressure)
+    TextView tvValueForPressure;
+    @BindView(R.id.valueForHumidity)
+    TextView tvValueForHumidity;
+    @BindView(R.id.valueForCloudiness)
+    TextView tvValueForCloudiness;
+    @BindView(R.id.valueForSunrise)
+    TextView tvValueForSunrise;
+    @BindView(R.id.valueForSunset)
+    TextView tvValueForSunset;
+    @BindView(R.id.tvDate)
+    TextView tvDateDay;
+    @BindView(R.id.tvMonth)
+    TextView tvDateMonth;
+    @BindView(R.id.tvYear)
+    TextView tvDateYear;
+    @BindView(R.id.descCloud)
+    TextView tvDescCloud;
+    @BindView(R.id.imageIcon)
+    ImageView imageForIcon;
+    @BindView(R.id.imageMap)
+    ImageView imageMap;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     private ForecastAdapter adapter;
 
 
+    @Override
+    public int getViewId() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setUpViews();
         setUpRecyclerView();
         loadCurrentWeathers();
         loadForecastWeathers();
@@ -99,7 +131,7 @@ public class MainActivity extends BaseActivity {
     private void addValues(CurrentWeather currentWeather) {
         tvCityName.setText(getString(R.string.comma,currentWeather.getName()
                 ,currentWeather.getSys().getCountry()));
-        tvValurForWind.setText(getString(R.string.speedForWind, currentWeather.getWind().getSpeed().toString()));
+        tvValueForWind.setText(getString(R.string.speedForWind, currentWeather.getWind().getSpeed().toString()));
         tvValueForPressure.setText(getString(R.string.mbForPressure, currentWeather.getMain().getPressure().toString()));
         tvValueForHumidity.setText(currentWeather.getMain().getHumidity().toString() + "%");
         tvValueForCloudiness.setText(currentWeather.getClouds().getAll().toString() + "%");
@@ -117,25 +149,5 @@ public class MainActivity extends BaseActivity {
     private void glide(Response<CurrentWeather> response) {
         Glide.with(MainActivity.this).load("http://openweathermap.org/img/wn/" + response.body().
                 getWeather().get(0).getIcon() + "@2x.png").centerCrop().into(imageForIcon);
-    }
-
-    private void setUpViews() {
-        tvCityName = findViewById(R.id.cityName);
-        tvTempNow = findViewById(R.id.tempNow);
-        tvTempMaxToday = findViewById(R.id.tempTodayMax);
-        tvTempMinToday = findViewById(R.id.tempTodayMin);
-        tvValurForWind = findViewById(R.id.valueForWind);
-        tvValueForPressure = findViewById(R.id.valueForPressure);
-        tvValueForHumidity = findViewById(R.id.valueForHumidity);
-        tvValueForCloudiness = findViewById(R.id.valueForCloudiness);
-        tvValueForSunrise = findViewById(R.id.valueForSunrise);
-        tvValueForSunset = findViewById(R.id.valueForSunset);
-        imageForIcon = findViewById(R.id.imageIcon);
-        recyclerView = findViewById(R.id.recyclerView);
-        tvDateDay = findViewById(R.id.tvDate);
-        tvDateMonth = findViewById(R.id.tvMonth);
-        tvDateYear = findViewById(R.id.tvYear);
-        tvDescCloud = findViewById(R.id.descCloud);
-        imageMap = findViewById(R.id.imageMap);
     }
 }

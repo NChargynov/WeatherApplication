@@ -7,15 +7,18 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
- abstract public class BaseActivity extends AppCompatActivity {
+import butterknife.ButterKnife;
 
-//     protected abstract int getViewLayout();
+abstract public class BaseActivity extends AppCompatActivity {
 
-     @Override
-     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-         super.onCreate(savedInstanceState, persistentState);
-//         setContentView(getViewLayout());
-     }
+    public abstract int getViewId();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getViewId());
+        ButterKnife.bind(this);
+    }
 
      protected void toast(String message){
          Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

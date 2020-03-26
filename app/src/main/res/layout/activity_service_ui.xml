@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.service.ServiceUIActivity">
 
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

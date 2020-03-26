@@ -21,6 +21,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //forHideBaseURL
+            buildConfigField "String", "MAP_KEY", "\"${mapKey}\""
+        }
+
+        debug{
+            //forHideBaseURL
+            buildConfigField "String", "MAP_KEY", "\"${mapKey}\""
         }
     }
     compileOptions {
@@ -53,6 +60,19 @@ dependencies {
     //Json
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    //mapBox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.0.0'
+
+    //fusedLocation
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //eventBus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
+    //butterKnife
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
 
 }

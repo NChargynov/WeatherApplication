@@ -12,9 +12,13 @@ import com.geektech.weatherapplication.ui.onboard.OnBoardActivity;
 public class SplashActivity extends BaseActivity {
 
     @Override
+    public int getViewId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         chooseScreen();
     }
 
